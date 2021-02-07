@@ -1,0 +1,52 @@
+﻿#menu{
+    width:800px;
+    height:300px;
+    display:flex;
+    position:relative;
+    margin-left:20%;
+}
+#buttGetFile{
+    width:150px;
+    height:40px;
+   
+}
+.btnCreate{
+    height:35px;
+    width:130px;
+    margin-left:6%;
+}
+.inpFilter {
+    width: 130px;
+    position:absolute;
+    margin-top:16%;
+   
+}
+.btnFilter {
+    height: 35px;
+    width:130px;
+    position: absolute;
+    margin-top: 16%;
+    margin-left: 39.5%;
+}
+.fieldValue {
+    position: absolute;
+    margin-top: 8%;
+    width:130px;
+}
+.checkSort {
+    position: absolute;
+    margin-top: 9%;
+    margin-left:20%;
+}
+.labelSort {
+    position: absolute;
+    margin-top: 8.5%;
+    margin-left: 22%;
+}
+.btnSort {
+    height: 35px;
+    width: 130px;
+    position: absolute;
+    margin-top: 8%;
+    margin-left: 39.5%;
+}

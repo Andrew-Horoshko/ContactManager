@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<head>
+    <link href="~/css/Contacts.css" rel="stylesheet" />
+</head>
+<div id="menu">
+    <input type="file" name="CSVFile" class="buttGetFile" style="height:35px;" />
+    <a class="btn btn-success , btnCreate" asp-area="" asp-controller="Home" asp-action="Index">Create</a>
+    <select class="custom-select , fieldValue">
+        <option selected="">Field</option>
+        <option value="1">Name</option>
+        <option value="2">Date of birth</option>
+        <option value="3">Married</option>
+        <option value="4">Phone</option>
+        <option value="5">Salary</option>
+    </select>
+    <input type="checkbox" class="checkSort" id="customSwitch1" checked="">
+    <button class="btn btn-info ,  btnSort">Sort</button>
+    <label class="labelSort" for="customSwitch1">Descending</label>
+    <input type="text" class="form-control , inpFilter" placeholder="Filter value" id="inputDefault">
+    <button class="btn btn-info ,  btnFilter">Filter</button>
+</div>
