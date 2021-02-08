@@ -34,3 +34,4 @@ C:\Users\Gehova\source\repos\ContactManager\ContactManager\obj\Debug\netcoreapp3
 C:\Users\Gehova\source\repos\ContactManager\ContactManager\obj\Debug\netcoreapp3.1\ContactManager.pdb
 C:\Users\Gehova\source\repos\ContactManager\ContactManager\obj\Debug\netcoreapp3.1\ContactManager.genruntimeconfig.cache
 C:\Users\Gehova\source\repos\ContactManager\ContactManager\obj\Debug\netcoreapp3.1\ContactManager.csproj.CopyComplete
+C:\Users\Gehova\source\repos\ContactManager\ContactManager\obj\Debug\netcoreapp3.1\Razor\Views\Home\Create.cshtml.g.cs
