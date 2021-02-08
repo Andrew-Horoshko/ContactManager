@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using ContactManager.Classes;
+using System.Data;
+using System.Globalization;
 
 namespace ContactManager.Controllers
 {
@@ -47,10 +49,39 @@ namespace ContactManager.Controllers
             }
             ContactModel obj = new ContactModel();
 
-            obj.OpenFile(uploadedFile);
+            var contact =  obj.OpenFile(uploadedFile);
+            con.Open();
+            com.Connection = con;
+            // com.CommandText = "INSERT INTO [Apps].[dbo].[Contact] ( Name , [Date of birth] , Married , Phone,Salary) VALUES("+ contact.Name +"," + contact.DateOfBirth +","+contact.Married +","+ contact.Phone+"," +contact.Salary +") ";
+            com.CommandText = "INSERT INTO [Apps].[dbo].[Contact] ( Name , [Date of birth] , Married , Phone,Salary) VALUES( @Name, @DateOfBirth, @Married, @Phone, @Salary) ";
+            com.Parameters.Add("@Name", SqlDbType.VarChar );
+            com.Parameters["@Name"].Value = contact.Name;
+            DateTime date = DateTime.ParseExact(contact.DateOfBirth,
+                         "yyyy-MM-dd HH:mm:ss.fff",
+                         CultureInfo.InvariantCulture);
+
+            com.Parameters.Add("@DateOfBirth", SqlDbType.Date);
+            com.Parameters["@DateOfBirth"].Value = date;
+            com.Parameters.Add("@Married", SqlDbType.Bit);
+            com.Parameters["@Married"].Value = contact.Married;
+            com.Parameters.Add("@Phone", SqlDbType.VarChar);
+            com.Parameters["@Phone"].Value = contact.Phone;
+            com.Parameters.Add("@Salary", SqlDbType.Decimal);
+            com.Parameters["@Salary"].Value = contact.Salary;
+            com.ExecuteNonQuery(); 
+            con.Close();
             FetchData();
             return View(contactsList);
         }
+        /* string commandText = "UPDATE Sales.Store SET Demographics = @demographics "
+        + "WHERE CustomerID = @ID;";
+
+    using (SqlConnection connection = new SqlConnection(connectionString))
+    {
+        SqlCommand command = new SqlCommand(commandText, connection);
+        command.Parameters.Add("@ID", SqlDbType.Int);
+        command.Parameters["@ID"].Value = customerID;
+        command.Parameters.AddWithValue("@demographics", demoXml);*/
         private void FetchData()
         {
             if (contactsList.Count > 0) contactsList.Clear();
@@ -72,7 +103,10 @@ namespace ContactManager.Controllers
                         Salary = dr["Salary"].ToString()
                     });
                 }
-                con.Close();
+                /*   dr.Close();
+                 com.CommandText = "INSERT INTO [Apps].[dbo].[Contact] (Id , Name , [Date of birth] , Married , Phone,Salary) VALUES(6, 'Marta', '01.01.1991', 1, '432242', 0) ";
+                 com.ExecuteNonQuery();*/
+        con.Close();
             }
             catch (Exception ex)
             {

@@ -61,7 +61,7 @@ namespace ContactManager.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Data Source = &quot;DESKTOP-ADLSV0O&quot;;database=&quot;Apps&quot;;integrated security = SSPI;.
+        ///   Ищет локализованную строку, похожую на Data Source = &quot;DESKTOP-ADLSV0O&quot;;database=&quot;Apps&quot;;integrated security = SSPI;MultipleActiveResultSets=true;.
         /// </summary>
         internal static string ConnectionString {
             get {
