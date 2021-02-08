@@ -1,5 +1,8 @@
-﻿@model ContactManager.Models.ContactModel
+﻿@using ContactManager.Classes 
+
 @{
+    string[] TableHeaders = new string[] { "Name", "Date of birth","Married","Phone" , "Salary" };
+
 }
 <head>
     <link href="~/css/Contacts.css" rel="stylesheet" />
@@ -23,4 +26,34 @@
     <input type="text" class="form-control , inpFilter" placeholder="Filter value" id="inputDefault">
     <button class="btn btn-info ,  btnFilter">Filter</button>
 </div>
-<h1>@Model.file</h1>
+<div >
+    <table class="table table-hover">
+        <thead>
+            <tr>
+               
+                    @foreach(var head in TableHeaders)
+                    {
+                        <th>
+                            @head
+                       </th>
+                    }
+                
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var contact in Model)
+                {
+                    <tr class="table-light">
+                        <td>@contact.Name</td>
+                        <td>@contact.DateOfBirth</td>
+                        <td>@contact.Married</td>
+                        <td>@contact.Phone</td>
+                        <td>@contact.Salary</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
