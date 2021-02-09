@@ -1,0 +1,143 @@
+﻿@using ContactManager.Classes
+
+@{
+    string[] TableHeaders = new string[] { "Name", "Date of birth", "Married", "Phone", "Salary" };
+
+}
+<head>
+    <link href="~/css/Contacts.css" rel="stylesheet" />
+</head>
+<div id="menu">
+    <form asp-action="Create" asp-controller="Home" method="post" enctype="multipart/form-data" style="width:100%; height:40px;">
+        <input type="file" name="uploadedFile" class="buttGetFile" style="height:35px;" />
+        <button class="btn btn-success , btnCreate" type="submit">Create</button>
+    </form>
+    <select class="custom-select , fieldValue" id="field">
+        <option selected="">Field</option>
+        <option value="0">Name</option>
+        <option value="1">Date of birth</option>
+        <option value="2">Married</option>
+        <option value="3">Phone</option>
+        <option value="4">Salary</option>
+    </select>
+    <input type="checkbox" class="checkSort" id="customSwitch1" checked="">
+    <button class="btn btn-info ,  btnSort" onclick="sortTable()" >Sort</button>
+    <label class="labelSort" for="customSwitch1">Descending</label>
+    <input type="text" class="form-control , inpFilter"  placeholder="Filter value" id="inputDefault" onkeyup="myFunction()">
+</div>
+<div>
+    <table  id ="contacts" class="table table-hover">
+        <thead>
+            <tr>
+
+                @foreach (var head in TableHeaders)
+                {
+                    <th>
+                        @head
+                    </th>
+                }
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var contact in Model)
+                {
+                    <tr class="table-light">
+                        <td>@contact.Name</td>
+                        <td>@contact.DateOfBirth</td>
+                        <td>@contact.Married</td>
+                        <td>@contact.Phone</td>
+                        <td>@contact.Salary</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch , order ,selector ,field;
+    table = document.getElementById("contacts");
+    order = document.getElementById("customSwitch1");
+    selector = document.getElementById("field");
+    field = selector.options[selector.selectedIndex].value;
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+        shouldSwitch = false;
+        if (field != 4 && field != 1) {
+            x = rows[i].getElementsByTagName("TD")[field];
+            y = rows[i + 1].getElementsByTagName("TD")[field];
+  
+        }
+        else if (field == 1) {
+            x = Date.parse(rows[i].getElementsByTagName("TD")[field].innerHTML);
+            y = Date.parse(rows[i + 1].getElementsByTagName("TD")[field].innerHTML);
+            console.log(x);
+        }
+        else {
+            x = parseFloat(rows[i].getElementsByTagName("TD")[field].innerHTML);
+            y = parseFloat(rows[i + 1].getElementsByTagName("TD")[field].innerHTML);
+     
+        }
+        if (field != 4 && field != 1) {
+            if (order.checked) {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            else {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+
+        else {
+            if (order.checked) {
+                if (x > y) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            else {
+                if (x < y) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue, selector, field;
+        input = document.getElementById("inputDefault");
+        filter = input.value.toUpperCase();
+        selector = document.getElementById("field");
+        field = selector.options[selector.selectedIndex].value;
+        table = document.getElementById("contacts");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[field];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
