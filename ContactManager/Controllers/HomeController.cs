@@ -50,7 +50,7 @@ namespace ContactManager.Controllers
             ContactModel obj = new ContactModel();
 
             var contact =  obj.OpenFile(uploadedFile);
-            con.Open();
+           /* con.Open();
             com.Connection = con;
             // com.CommandText = "INSERT INTO [Apps].[dbo].[Contact] ( Name , [Date of birth] , Married , Phone,Salary) VALUES("+ contact.Name +"," + contact.DateOfBirth +","+contact.Married +","+ contact.Phone+"," +contact.Salary +") ";
             com.CommandText = "INSERT INTO [Apps].[dbo].[Contact] ( Name , [Date of birth] , Married , Phone,Salary) VALUES( @Name, @DateOfBirth, @Married, @Phone, @Salary) ";
@@ -69,19 +69,10 @@ namespace ContactManager.Controllers
             com.Parameters.Add("@Salary", SqlDbType.Decimal);
             com.Parameters["@Salary"].Value = contact.Salary;
             com.ExecuteNonQuery(); 
-            con.Close();
+            con.Close();*/
             FetchData();
             return View(contactsList);
         }
-        /* string commandText = "UPDATE Sales.Store SET Demographics = @demographics "
-        + "WHERE CustomerID = @ID;";
-
-    using (SqlConnection connection = new SqlConnection(connectionString))
-    {
-        SqlCommand command = new SqlCommand(commandText, connection);
-        command.Parameters.Add("@ID", SqlDbType.Int);
-        command.Parameters["@ID"].Value = customerID;
-        command.Parameters.AddWithValue("@demographics", demoXml);*/
         private void FetchData()
         {
             if (contactsList.Count > 0) contactsList.Clear();
