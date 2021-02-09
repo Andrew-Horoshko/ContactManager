@@ -32,11 +32,6 @@ namespace ContactManager.Controllers
         }
 
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public IActionResult Create(IFormFile uploadedFile)
         {
             if (uploadedFile != null)
@@ -46,15 +41,21 @@ namespace ContactManager.Controllers
                 {
                      uploadedFile.CopyTo(fileStream);
                 }
+            
+                ContactModel obj = new ContactModel();
+                var contact = obj.OpenFile(uploadedFile);
+                AddContact(contact);
             }
-            ContactModel obj = new ContactModel();
-
-            var contact =  obj.OpenFile(uploadedFile);
-           /* con.Open();
+            FetchData();
+            return View(contactsList);
+        }
+        private void AddContact(Person contact)
+        {
+            con.Open();
             com.Connection = con;
-            // com.CommandText = "INSERT INTO [Apps].[dbo].[Contact] ( Name , [Date of birth] , Married , Phone,Salary) VALUES("+ contact.Name +"," + contact.DateOfBirth +","+contact.Married +","+ contact.Phone+"," +contact.Salary +") ";
+             com.CommandText = "INSERT INTO [Apps].[dbo].[Contact] ( Name , [Date of birth] , Married , Phone,Salary) VALUES("+ contact.Name +"," + contact.DateOfBirth +","+contact.Married +","+ contact.Phone+"," +contact.Salary +") ";
             com.CommandText = "INSERT INTO [Apps].[dbo].[Contact] ( Name , [Date of birth] , Married , Phone,Salary) VALUES( @Name, @DateOfBirth, @Married, @Phone, @Salary) ";
-            com.Parameters.Add("@Name", SqlDbType.VarChar );
+            com.Parameters.Add("@Name", SqlDbType.VarChar);
             com.Parameters["@Name"].Value = contact.Name;
             DateTime date = DateTime.ParseExact(contact.DateOfBirth,
                          "yyyy-MM-dd HH:mm:ss.fff",
@@ -68,10 +69,8 @@ namespace ContactManager.Controllers
             com.Parameters["@Phone"].Value = contact.Phone;
             com.Parameters.Add("@Salary", SqlDbType.Decimal);
             com.Parameters["@Salary"].Value = contact.Salary;
-            com.ExecuteNonQuery(); 
-            con.Close();*/
-            FetchData();
-            return View(contactsList);
+            com.ExecuteNonQuery();
+            con.Close();
         }
         private void FetchData()
         {
@@ -94,9 +93,6 @@ namespace ContactManager.Controllers
                         Salary = dr["Salary"].ToString()
                     });
                 }
-                /*   dr.Close();
-                 com.CommandText = "INSERT INTO [Apps].[dbo].[Contact] (Id , Name , [Date of birth] , Married , Phone,Salary) VALUES(6, 'Marta', '01.01.1991', 1, '432242', 0) ";
-                 com.ExecuteNonQuery();*/
         con.Close();
             }
             catch (Exception ex)

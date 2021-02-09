@@ -21,7 +21,6 @@ C:\Users\Gehova\source\repos\ContactManager\ContactManager\obj\Debug\netcoreapp3
 C:\Users\Gehova\source\repos\ContactManager\ContactManager\obj\Debug\netcoreapp3.1\ContactManager.TagHelpers.input.cache
 C:\Users\Gehova\source\repos\ContactManager\ContactManager\obj\Debug\netcoreapp3.1\ContactManager.TagHelpers.output.cache
 C:\Users\Gehova\source\repos\ContactManager\ContactManager\obj\Debug\netcoreapp3.1\ContactManager.RazorCoreGenerate.cache
-C:\Users\Gehova\source\repos\ContactManager\ContactManager\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Gehova\source\repos\ContactManager\ContactManager\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\Gehova\source\repos\ContactManager\ContactManager\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Gehova\source\repos\ContactManager\ContactManager\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs

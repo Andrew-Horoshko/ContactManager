@@ -23,8 +23,7 @@
     <input type="checkbox" class="checkSort" id="customSwitch1" checked="">
     <button class="btn btn-info ,  btnSort" onclick="sortTable()" >Sort</button>
     <label class="labelSort" for="customSwitch1">Descending</label>
-    <input type="text" class="form-control , inpFilter" placeholder="Filter value" id="inputDefault">
-    <button class="btn btn-info ,  btnFilter">Filter</button>
+    <input type="text" class="form-control , inpFilter"  placeholder="Filter value" id="inputDefault" onkeyup="myFunction()">
 </div>
 <div>
     <table  id ="contacts" class="table table-hover">
@@ -121,4 +120,24 @@ function sortTable() {
     }
   }
 }
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue, selector, field;
+        input = document.getElementById("inputDefault");
+        filter = input.value.toUpperCase();
+        selector = document.getElementById("field");
+        field = selector.options[selector.selectedIndex].value;
+        table = document.getElementById("contacts");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[field];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
 </script>
